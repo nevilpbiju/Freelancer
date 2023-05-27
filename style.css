@@ -1,0 +1,245 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Jost', sans-serif;
+    color: white;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+#logo{
+    width: 200px;
+    height: auto;
+}
+
+.s{
+    height: 120vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  /* background: linear-gradient(45deg, black 0%, white 50%, black 50%, white 100%); */
+}
+
+#s1{
+    background-image: linear-gradient(45deg,#000015, #342871);
+}
+
+#home-graphics{
+    width: 50%;
+    height: auto;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(0%,-50%);
+}
+
+/* Navigation bar */
+
+#navbar{
+    z-index: 10;
+    position: fixed;
+    top: 6vh;
+    left: 20vw;
+    display: flex;
+}
+
+#menu{
+    list-style: none;
+    display: flex;
+    float: right;
+    position: fixed;
+    right: 20vw;
+    top: 7vh;
+    vertical-align: middle;
+}
+
+#menu li a{
+    /* font-weight: bold; */
+    text-decoration: none;
+    padding: 1.3vh 1.3vw;
+    margin: 1vh 1vw;
+}
+
+#join-btn{
+    border: solid white 1px;
+    /* border-radius: 3px; */
+    transition: 0.3s;
+}
+
+#join-btn:hover{
+    background-color: white;
+    color: #000015;
+}
+
+/* Search Area */
+
+#search-area{
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(-5%,-50%);
+}
+
+#search-text{
+    height: 50px;
+    width: 500px;
+    border: none;
+    outline: none;
+    padding-left: 1vw;
+    /* border-radius: 3px; */
+    color: #000015;
+}
+
+#search-btn{
+    height: 50px;
+    padding: 0 1.5vw;
+    background: radial-gradient(#B76E77, #5846A5);
+    border: white 1px solid;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    left: -20px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 3px;
+    cursor: pointer;
+}
+
+#search-head{
+    font-size: 25px;
+    position: relative;
+    top: -25px;
+}
+
+#quotes{
+    font-size: 13px;
+    color: gray;
+    position: relative;
+    top: 75px;
+}
+
+#author{
+    color: gray;
+    text-align: right;
+    position: relative;
+    left: -20px;
+}
+
+
+/* Categories */
+
+#section-head{
+    font-size: 30px;
+    width: fit-content;
+    position: relative;
+    top: 20vh;
+    left: 10vw;
+}
+
+#category-table{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#category-table tr td{
+    padding: 1vh 1vw;
+}
+
+#category{
+    background-color: #ffffffcc;
+    padding: 2.5vh 2.5vw;
+    /* border-radius: 3px; */
+    cursor: pointer;
+}
+
+#category:hover{
+    background-color: white;
+}
+
+#category img{
+    width: 120px;
+    height: auto;
+}
+
+#category p{
+    color: #000015;
+    text-align: center;
+}
+
+
+/* Welcome Note*/
+
+#s3{
+    background-image: linear-gradient(135deg,#000000ee, #00000066),url(../files/free.jpg);
+}
+
+#s4{
+    background-image: linear-gradient(45deg, #000000dd, #000000aa),url(../files/business.jpg);
+}
+
+
+#welcome-head{
+    font-size: 30px;
+    width: fit-content;
+    position: relative;
+    top: 40vh;
+    left: 10vw;
+}
+
+#welcome-note{
+    position: relative;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 70%;
+    text-align: justify;
+    font-size: 20px;
+    background-color: #8a8a8a66;
+    padding: 7vh 7vw;
+    /* border-radius: 3px; */
+}

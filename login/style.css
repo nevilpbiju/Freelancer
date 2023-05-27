@@ -1,0 +1,96 @@
+#login-section{
+    height: 100vh;
+    background-image: url(../files/login-screen.jpg);
+
+}
+
+.blur {
+    background: #0a00159a; 
+    /* Make sure this color has an opacity of less than 1 */
+    backdrop-filter: blur(3px);
+    height: 100vh;
+    width: 100vw;
+}
+
+
+#login-form{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 25%;
+    height: auto;
+    background-color: #ffffffaa;
+    border-radius: 3px;
+}
+
+.input-field{
+    width: calc(100% - 40px);
+    height: 50px;
+    outline: none;
+    color: #000015;
+    margin: 10px 10px;
+    border: #000015 .5px solid;
+    border-radius: 3px;
+    padding: 0 10px;
+    background-color: #ffffffaa;
+}
+
+
+#form-title{
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    padding: 15px 0;
+    font-weight: bold;
+    color: #000015;
+}
+
+#login{
+    width: calc(100% - 20px);
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: #000015;
+    margin: 10px 10px;
+    border-radius: 3px;
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+#reg{
+    position: relative;
+    margin: 2vh 0 4vh 0;
+    text-align: center;
+    color: #000015;
+}
+
+#reg a{
+    text-decoration: none;
+    color: #8700c1;
+}
+
+#google{
+    background-color: white;
+    color: #000015;    
+}
+
+#google img{
+    margin-top: 5px;
+    width: calc(100% - 150px);
+    height: auto;
+}
+
+.reg-btn-1{
+    width: calc(100% - 20px);
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: #000015;
+    margin: 10px 10px;
+    border-radius: 3px;
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: 17px;
+}
