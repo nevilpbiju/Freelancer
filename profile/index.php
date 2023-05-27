@@ -70,6 +70,10 @@ else{
 <!DOCTYPE html>
     <head>
         <title>SOLOTREFF | PROFILE</title>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="../bootstrap.min.css" type="text/css">
+
+
         <link href="style.css" rel="stylesheet" type="text/css">
         <link href="../navigation.css" rel="stylesheet" type="text/css">
 
@@ -84,7 +88,7 @@ else{
     <body>
         <section id="s1" class="app-screen">
             <div id="navbar">
-                <img src="../files/icon.png" class="icon">
+                <!-- <img src="../files/icon.png" class="logo-icon"> -->
                 <a href="../app/" class="nav-button"><img src="../files//Home.png" class="nav-logo"></a>
                 <a href="../message/" class="nav-button"><img src="../files/message.png" class="nav-logo"></a>
                 <a href="../search/" class="nav-button"><img src="../files/connections.png" class="nav-logo"></a>
