@@ -28,21 +28,58 @@ else{
 
 
 
-
-
 <!DOCTYPE html>
     <head>
-        <title>SOLOTREFF | PROFILE</title>
-        <link href="style.css" rel="stylesheet" type="text/css">
-        <link href="../navigation.css" rel="stylesheet" type="text/css">
+        <title>SoloTreff</title>
+        <meta charset="utf-8">
+        <!-- Custom style -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="../style/navigation.css">
 
-        <link rel="icon" href="../files/icon.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Wendy+One&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="../style/bootstrap.min.css" type="text/css">
+
+    </head>
+    <body>
+        <header>
+            <nav class="navigation-bar">
+                <a href="../app/"><img src="../files/black-logo.png" class="logo"></a>
+                <form name="search-form" class="search-form" method="post">
+                    <input type="text" autocomplete="off" name="search"  id="search" placeholder="Search..." required>
+                    <!-- <button type="submit"></button> -->
+                </form>
+                <ul class="nav-menu">
+                    <!-- Chat -->
+                    <li><a href="../message/" class="menu-item">Chat</a></li>
+                    <!-- Profile -->
+                    <li><a href="../profile/" class="menu-item">Profile</a></li>
+                    <!-- Contact Us -->
+                    <li><a href="../contact.php" class="menu-item">Contact us</a></li>
+                    <!-- Logout -->
+                    <li><a href="../logout/" class="menu-item">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section class="profile">
+            <!-- Profile Info -->
+            <main class="profile-details">
+                <div  class="profile-picture">
+                    <img src="<?php echo $dp?>">
+                </div>
+                <div class="post">
+                    <form method="post">
+                        <textarea placeholder="Write Here..." id="post-content" class="profile-editor" name="post" onkeyup="countChars()" maxlength="450" style="resize: none;"></textarea>
+                        <div id="charCount">0/450</div>
+                        <a href="../profile/" class="btn">Cancel</a>
+                        <label for="post-img" class="img-btn"><img src="../files/img-outline.png"></label><input type="file" name="post-img" id="post-img" style="display: none;">
+                        <button id="save-profile" class="btn" type="submit">POST</button>
+                    </form>
+                </div>
+            </main>
         <script type = "text/javascript" >
             function countChars() {
                 var text = document.getElementById("post-content").value;
@@ -55,42 +92,6 @@ else{
             setTimeout("preventBack()", 0);  
             window.onunload = function () { null };
         </script>
-    </head>
-    <body>
-        <section id="s1" class="app-screen">
-            <div id="navbar">
-                <img src="../files/icon.png" class="icon">
-                <a href="../app/" class="nav-button"><img src="../files//Home.png" class="nav-logo"></a>
-                <a href="../message/" class="nav-button"><img src="../files/message.png" class="nav-logo"></a>
-                <a href="../search/" class="nav-button"><img src="../files/connections.png" class="nav-logo"></a>
-                <a href="../logout/" class="nav-button"><img src="../files/exit.png" class="nav-logo"></a>
-                <a href="../profile/" class="nav-button"><img src="https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="nav-logo" id="nav-dp"></a>
-            </div>
-            <section id="profile">
-                <div class="bg">
-                    <div id="profile-head">Profile</div>
-                </div>
-                <div class="profile-details">
-                    <img id="dp" src=<?php echo $dp?>>
-                    <div class="name"><?php echo $name?></div>
-                    <div id="title"><?php echo $title?></div>
-                    <main class="details">
-                        <div>PROJECTS<br><?php echo $projects?></div>
-                        <div>RATING<br><?php echo $rating?></div>
-                    </main>
-                    <div>
-                        <button id="connect" class="profile-button" onclick="history.back()">Cancel</button>
-                    </div>
-                </div>
-                <div class="post">
-                    <form method="post">
-                        <textarea placeholder="Write Here..." id="post-content" name="post" onkeyup="countChars()" maxlength="450"></textarea>
-                        <div id="charCount">0/450</div>
-                        <input type="file" name="post-img" id="post-img">
-                        <button id="save-profile" type="submit">Upload</button>
-                    </form>
-                </div>
-            </section>
-        </section>
+
     </body>
 </html>

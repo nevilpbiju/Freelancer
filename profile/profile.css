@@ -55,28 +55,6 @@
     resize: none;
 }
 
-#post-content{
-    margin: 25px auto 15px auto;
-    text-align: justify;
-    width: 100%;
-    padding: 10px;
-    resize: none;
-    height: 150px;
-}
-
-#charCount{
-    margin-bottom: 25px;
-    color: #888888;
-}
-
-#summary{
-    text-align: justify;
-    width: 100%;
-    padding: 10px;
-    resize: none;
-    height: 200px;
-}
-
 
 .details-container input:first-child{
     margin-top: 20px;
@@ -153,13 +131,6 @@
     text-transform: uppercase;
 }
 
-.img-btn img{
-    height: 41px;
-    width: auto;
-    margin: auto 10px;
-    cursor: pointer;
-}
-
 /* ----------------------------------
                 Posts
 ------------------------------------- */
@@ -226,8 +197,4 @@
 
 .category-table::-webkit-scrollbar-track{
     width: 0px;
-}
-
-#update-profile{
-    margin-top: 15px;
 }

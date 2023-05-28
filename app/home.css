@@ -1,0 +1,178 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    color: black;
+    font-family: 'Lato', sans-serif;
+    text-decoration: none;
+}
+
+.logo{
+    padding-top: 10px;
+    height: 60px;
+    width: auto;
+}
+
+
+.navigation-bar{
+    z-index: 10;
+    width: 100vw;
+    display: flex;
+    background-color: white;
+    padding: 3vh 5vw;
+    position: fixed;
+    top: 0px;
+}
+
+.nav-menu{
+    margin-top: 15px;
+}
+
+.menu-item:hover{
+    color: #fa2837;
+    text-decoration: none;
+}
+
+.menu-item{
+    padding: 0 10px;
+    text-decoration: none;
+    color: #111;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+.nav-menu{
+    list-style: none;
+    display: flex;
+    float: right;
+    position: absolute;
+    right: 5%;
+    top: 30px;
+}
+
+.nav-menu li a img{
+    padding: 0 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.search-form{
+    position: relative;
+    left: 15%;
+    transform: translateX(-15%);
+    top: 10px;
+}
+
+#search{
+    width: 40vw;
+    height: 46px;
+    line-height: 30px;
+    font-size: 15px;
+    background: white none repeat scroll 0 0;
+    color: #111;
+    border: .2px solid #888888;
+    outline: none;
+    padding: 0px 15px;
+}
+
+
+.listing{
+    position: relative;
+    top: 75px;
+}
+
+
+#freelancer{
+    min-width: 250px;
+    height: 45vh;
+    margin: 20px;
+    /* border-radius: 3px; */
+    /* border: .5px solid rgb(0, 0, 0); */
+    box-shadow: .5px 0px 5px 1px grey;
+    padding: 0;
+    border: none;
+}
+
+#freelancer-bg{
+    width: 100%;
+    height: 15vh;
+    background-image: url(../files/graphic.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+#freelancer-discription{
+    height: 10vh;
+}
+
+#freelancer-details{
+    display: flex;
+    padding: 20px;
+    position: relative;
+    top: -5%;
+}
+
+#freelancer-details *{
+    padding-left: 5px;
+    color: #000015;
+}
+
+#freelancer-name{
+    font-weight: bold;
+    font-size: 17px;
+}
+
+#freelancer-title{
+    font-size: 12px;
+    color: #686868;
+}
+
+#freelancer-word{
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #000015;
+    max-width: 250px;
+}
+
+#freelancer-img{
+    width: 30px;
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 100%;
+    padding: 5px;
+}
+
+.category-label{
+    color: #000015;
+    font-weight: bold;
+    width: fit-content;
+    margin: 30px;
+    margin-bottom: 0px;
+}
+
+
+.category-group::-webkit-scrollbar {
+    display: none;
+}
+
+.body::-webkit-scrollbar{
+    width: 1px;
+}
+
+
+.category-group{
+    position: relative;
+    /* left: calc(5vw + 20px); */
+    display: flex;
+    overflow-y: scroll;
+    width: 100%;
+    scrollbar-width: none;
+}
+
+.category-table::-webkit-scrollbar{
+    width: 0px;
+}
+
+.category-table::-webkit-scrollbar-track{
+    width: 0px;
+}

@@ -43,6 +43,13 @@ if(isset($_SESSION['user'])){
     $reviews_view='';
     if(mysqli_num_rows($reviews) > 0)
     {
+
+        
+                 
+                 
+            
+
+        
         $reviews_view='<main class="reviews">';
         while ($row = mysqli_fetch_array($reviews)){
             $authorpic= $row['profilepic'];
@@ -71,7 +78,7 @@ else{
         <title>SoloTreff</title>
         <meta charset="utf-8">
         <!-- Custom style -->
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="profile.css">
         <link rel="stylesheet" type="text/css" href="../style/navigation.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,9 +122,7 @@ else{
                         <span>PROJECTS: <?php echo $projects?></span>
                         <span>RATING: <?php echo $rating?></span>
                     </div>
-                    <button id="connect" class="btn">Connect</button>
-                    <a href="post.php" class="btn">Post</a>
-                    <a href="edit-profile.php" class="btn">Edit</a>
+                    <a href="edit-profile.html" class="btn">Edit<span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
                 </div>
             </main>
             <!-- Summary -->
