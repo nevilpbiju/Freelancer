@@ -52,14 +52,13 @@
 
 
         <!-- Section 3 -->
-        <section id="s3" class="s">
+        <!-- <section id="s3" class="s">
             <div id="welcome-head">For Freelancers</div>
             <div id="welcome-note">As a freelancer, you will have access to a diverse range of projects across multiple fields, 
                 including writing, design, programming, and more. Our platform is designed to provide you with a hassle-free experience 
                 and to help you grow your career as a freelancer. With our user-friendly interface, and a vast network of clients, 
                 you can trust us to provide you with a seamless and rewarding freelancing experience. Join us today 
                 and take the first step towards achieving your career goals as a freelancer.
-                <!-- <a href="#" id="join-btn" class="central-btn">Join Now</a> -->
             </div>
         </section>
         <section id="s4" class="s">
@@ -70,6 +69,6 @@
                 we guarantee that your experience with us will be nothing short of exceptional. 
                 Join us today and take the first step towards finding the perfect freelancer for your business needs.
             </div>
-        </section>
+        </section> -->
     </body>
 </html>
