@@ -21,4 +21,7 @@
     // mysqli_query($con,$sql);
     // $sql="CREATE TABLE `SoloTreff`.`Connection` (`id` VARCHAR(50) NOT NULL , `user1` VARCHAR(50) NOT NULL , `user2` VARCHAR(50) NOT NULL , `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`), UNIQUE (`user1`, `user2`)) ENGINE = InnoDB; ";
     // mysqli_query($con,$sql);
+    // $sql="CREATE TABLE `SoloTreff`.`mail` (`id` INT NOT NULL AUTO_INCREMENT , `email` VARCHAR(50) NOT NULL , `name` VARCHAR(50) NOT NULL , `msg` VARCHAR(1000) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+    // mysqli_query($con,$sql);
+     
 ?>

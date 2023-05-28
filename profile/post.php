@@ -6,6 +6,16 @@ session_start();
 if(isset($_SESSION['user'])){
     $myid = $_SESSION['user'];
 
+    function generateId() {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+        for ($i = 0; $i < 25; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+        return $randomString;
+    }
+
     // fetching profile details
     $sql = "SELECT `name`, `title`, `projects`, `rating`, `profilepic`, `description` from `Profile` where `id`='$myid'";
     $profile = mysqli_query($con,$sql);
@@ -18,12 +28,27 @@ if(isset($_SESSION['user'])){
         $description = $row['description'];
     }
 
+    // Post
+    if ($_POST){
+        $content =mysqli_real_escape_string($con,$_POST["post"]);
+        do{
+            $postId = generateId();
+            $sql = "SELECT * FROM `Post` WHERE `id` = '$postId'";
+            $post=mysqli_query($con,$sql);
+        }while(mysqli_num_rows($post)>0);
+        
+        $sql= "INSERT INTO `Post`(`id`, `content`, `wall`, `authorid`) VALUES ('$postId','$content','../files/graphic.jpg','$myid')";
+        if(!mysqli_query($con,$sql)){
+            die('Error: '.mysqli_error($con));
+        }
+    }
+
+
+
 }
 else{
     header("Location: ../login/");
 }
-
-
 ?>
 
 
@@ -72,7 +97,7 @@ else{
                 </div>
                 <div class="post">
                     <form method="post">
-                        <textarea placeholder="Write Here..." id="post-content" class="profile-editor" name="post" onkeyup="countChars()" maxlength="450" style="resize: none;"></textarea>
+                        <textarea placeholder="Write Here..." id="post-content" class="profile-editor" name="post" onkeyup="countChars()" maxlength="450" style="resize: none;" required></textarea>
                         <div id="charCount">0/450</div>
                         <a href="../profile/" class="btn">Cancel</a>
                         <label for="post-img" class="img-btn"><img src="../files/img-outline.png"></label><input type="file" name="post-img" id="post-img" style="display: none;">

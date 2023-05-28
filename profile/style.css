@@ -231,3 +231,22 @@
 #update-profile{
     margin-top: 15px;
 }
+
+
+/* Write review */
+
+#rev{
+    text-align: justify;
+    width: 100%;
+    padding: 10px;
+    resize: none;
+    height: 100px;
+}
+
+.review-form{
+    text-align: center;
+}
+
+#add-review{
+    margin: 25px auto;
+}

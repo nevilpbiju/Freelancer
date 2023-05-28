@@ -28,7 +28,7 @@
                     <!-- Profile -->
                     <li><a href="../profile/" class="menu-item">Profile</a></li>
                     <!-- Contact Us -->
-                    <li><a href="../contact.php" class="menu-item">Contact us</a></li>
+                    <li><a href="../contact-us" class="menu-item">Contact us</a></li>
                     <!-- Logout -->
                     <li><a href="../logout/" class="menu-item">Logout</a></li>
                 </ul>
