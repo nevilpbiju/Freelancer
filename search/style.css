@@ -1,127 +1,127 @@
-*{
-    padding: 0;
-    margin: 0;
-    font-family: 'Jost', sans-serif;
-    color: white;
+h1, h2, h3, h4, h5, h6 {
+	color:#111111;
+	font-weight:900;
+	margin:0 auto 15px;
+}
+h1 {
+	font-size: 50px;
+}
+h2 {
+	font-size: 40px;
+}
+h3 {
+	font-size: 28px;
+}
+h4 {
+	font-size:22px;
+}
+h5 {
+	font-size: 20px;
+	line-height:32px;
+}
+h6 {
+	font-size: 18px;
+}
+h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
+	font-weight:300
+}
+p {
+	font-size:16px;
+	line-height:26px;
+	font-weight:400;
+	margin-bottom:15px;
 }
 
-.body::-webkit-scrollbar{
-    width: 1px;
-}
-
-.app-screen{
-    width: 100%;
-}
-
-#search-bar{
-    height: 50px;
-    background-color: white;
+.listing{
     position: relative;
+    top: 150px;
+    width: 60%;
     left: 50%;
-    transform: translate(-50%,0);
-    width: 70%;
-    margin: 12px;
-    border-radius: 3px;
-    z-index: 5;
-    border: 0.5px solid #000015;
-    display: flex;
-    /* display: none; */
+    transform: translateX(-50%);
+    background-color: white;
 }
 
-#search-txt{
-    height: 40px;
-    margin: 5px;
-    margin-left: 15px;
-    width: calc(100% - 65px);
-    outline: none;
-    border: none;
-    color: #000015;
+.product-listing-m {
+    margin:0 auto 40px;
+    overflow: hidden;
 }
 
-.material-symbols-outlined {
-    padding-top: 15px;
-    background:none;
-    outline: none;
-    border: none;
-    height: 40px;
-    width: auto;
-    color: #000015;
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 48
+.product-listing-img {
+    float: left;
+    width: 45%;
+    position:relative;
+    overflow:hidden;
 }
 
-#continer-result{
-    position: relative;
-    left: calc(5vw + 20px);
-    width: calc(100% - 5vw - 50px);
+.product-listing-content {
+    float: left;
+    padding:20px 15px 20px 30px;
+    width: 55%;
 }
 
-#result-are{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+.product-listing-content h5 {
+    margin-bottom: 2px;
 }
 
+.product-listing-content h5 a {
+      color:#111;
+}
 
-#freelancer{
-    min-width: 250px;
-    height: 45vh;
-    margin: 10px 10px;
-    border-radius: 3px;
-    /* border: .5px solid rgb(0, 0, 0); */
-    box-shadow: .5px 0px 5px 1px grey;
+.product-listing-content ul {
+    margin: 0 auto 22px;
+    overflow: hidden;
     padding: 0;
-    border: none;
 }
 
-#freelancer-bg{
-    width: 100%;
-    height: 15vh;
-    background-image: url(../files/graphic.jpg);
-    background-size: cover;
-    background-position: center;
+.product-listing-content li {
+    float: left;
+    font-size: 13px;
+    font-weight: 400;
+    list-style: outside none none;
+    margin: 0 auto;
+    width: 33%;
 }
 
-#freelancer-discription{
-    height: 10vh;
+.product-listing-content li .fa {
+    font-size: 15px;
+    margin-right: 8px;
 }
 
-#freelancer-details{
-    display: flex;
-    padding: 20px;
-    position: relative;
-    top: -5%;
+.img-responsi{
+    width: 250px;
+    height: 250px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    
 }
 
-#freelancer-details *{
-    padding-left: 5px;
-    color: #000015;
+#resp-img{
+    height: 250px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
 
-#freelancer-name{
-    font-weight: bold;
+.btn{
+    background-color: #fa2837;
+    color: white;
+    text-transform: uppercase;
+}
+
+.gray-bg{
+    background-color: #eeeeee;
+}
+
+.display-name{
     font-size: 17px;
+    text-transform: uppercase;
+    text-decoration: none;
 }
 
-#freelancer-title{
-    font-size: 12px;
-    color: #686868;
+.display-name:hover{
+    color: #fa2837;
 }
 
-#freelancer-word{
-    padding-left: 20px;
-    padding-right: 20px;
-    color: #000015;
-    max-width: 250px;
-}
-
-#freelancer-img{
-    width: 30px;
-    height: 30px;
-    background-color: #ddd;
-    border-radius: 100%;
-    padding: 5px;
+.display-title{
+    font-size: 13px;
+    color: #888;
 }

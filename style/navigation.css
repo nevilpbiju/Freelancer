@@ -7,6 +7,10 @@
     text-decoration: none;
 }
 
+*::selection{
+    color: #888888;
+}
+
 .logo{
     padding-top: 10px;
     height: 60px;

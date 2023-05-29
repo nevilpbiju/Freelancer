@@ -5,7 +5,6 @@ session_start();
 
 if(isset($_SESSION['user'])){
     $myid = $_SESSION['user'];
-    $account = $myid;
 
     // Generate ID
     function generateId() {
@@ -17,86 +16,176 @@ if(isset($_SESSION['user'])){
         }
         return $randomString;
     }
-
-
-    // fetching profile details
-    $sql = "SELECT `name`, `title`, `projects`, `rating`, `profilepic`, `description` from `Profile` where `id`='$myid'";
-    $profile = mysqli_query($con,$sql);
-    while ($row = mysqli_fetch_array($profile)) {
-        $name = $row['name'];
-        $title = $row['title'];
-        $projects = $row['projects'];
-        $rating = $row['rating'];
-        $dp = $row['profilepic'];
-        $description = $row['description'];
-    }
-
-
-    // Fetching posts
-    $sql = "SELECT `wall`, `content` FROM `Post` WHERE `authorid`='$myid'";
-    $posts = mysqli_query($con,$sql);
-    $post_view='';
-    if(mysqli_num_rows($posts) > 0)
-    {
-        while ($row = mysqli_fetch_array($posts)){
-            $wall = $row['wall'];
-            $content= $row['content'];
-            $post_view.='<table id="freelancer"><tr><td id="freelancer-bg" style="background-image: url';
-            $post_view.=$wall.'"></td></tr><tr><td id="freelancer-discription"><div id="freelancer-word">';
-            $post_view.=$content.'</div></td></tr></table>';
-        }
-        // Check point
-    }
-
-    // Fetching Reviews
-    $sql = "SELECT Profile.name, Profile.profilepic, Review.rating, Review.review FROM `Review` INNER JOIN Profile ON Profile.id = Review.author WHERE Review.account='$myid' ORDER BY Review.Time";
-    $reviews = mysqli_query($con,$sql);
-    $reviews_view='';
-    $count = 0;
-    $total = 0;
-    if(mysqli_num_rows($reviews) > 0)
-    {
-        $reviews_view='<main class="reviews">';
-        while ($row = mysqli_fetch_array($reviews)){
-            $authorpic= $row['profilepic'];
-            $author= $row['name'];
-            $rating= $row['rating'];
-            $rev= $row['review'];
-            $reviews_view.='<div class="review-content"><div class="author-details"><div class="author-dp"><img src="';
-            $reviews_view.=$authorpic.'"></div><div class="author-name">';
-            $reviews_view.=$author.'</div><div class="rating">';
-            $reviews_view.=$rating.'.0</div></div><div class="review">';
-            $reviews_view.=$rev.'</div></div>';
-            $count+=1;
-            $total+=$rating;
-        }
-        $reviews_view.='</main>';
-        $avg_rating=round($total/$count,2);
-        $sql= "UPDATE `Profile` SET `rating` = '$avg_rating' WHERE `id`='$account'";
-        mysqli_query($con,$sql);
-        if(!mysqli_query($con,$sql)){
-            die('Error: '.mysqli_error($con));
-        }
-    }
-
-    // Post a review
-    $author =$myid;
-    $account = $myid; //Has to be changed
-
-    if ($_POST){
-        $review =mysqli_real_escape_string($con,$_POST["rev"]);
-        $rat = $_POST['rating'];
-        // header("Location: ../login/");
     
-        do{
-            $reviewId = generateId();
-            $sql = "SELECT * FROM `Review` WHERE `id` = '$reviewId'";
-            $revs=mysqli_query($con,$sql);
-        }while(mysqli_num_rows($revs)>0);
-        $sql= "INSERT INTO `Review`(`id`, `rating`, `review`, `account`, `author`) VALUES ('$reviewId','$rat','$review','$account','$author')";
-        if(!mysqli_query($con,$sql)){
-            die('Error: '.mysqli_error($con));
+    if(isset($_GET['account']) && $_GET['account']!=$myid){
+        // Other's profile
+
+        $account = $_GET['account'];
+
+        $profile_options='<button id="connect" class="btn">Connect</button>';
+
+        $review_section='<form name="review-form" class="review-form" method="post">
+        <h5>Rating</h5>
+        <fieldset class="star-rating">
+            <input type="radio" id="star5" name="rating" value=1.0 required/>
+            <label for="star5" title="5 stars"></label>
+            <input type="radio" id="star4" name="rating" value=2.0 />
+            <label for="star4" title="4 stars"></label>
+            <input type="radio" id="star3" name="rating" value="3.0" />
+            <label for="star3" title="3 stars"></label>
+            <input type="radio" id="star2" name="rating" value="4.0" />
+            <label for="star2" title="2 stars"></label>
+            <input type="radio" id="star1" name="rating" value="5.0" />
+            <label for="star1" title="1 star"></label>
+        </fieldset>
+        <h5>Add a review</h5>
+        <textarea class="profile-editor" id="rev" name="rev" required></textarea>
+        <button type="submit" class="btn" name="add-review" id="add-review">Save</button>
+    </form>';
+
+        // fetching profile details
+        $sql = "SELECT `name`, `title`, `projects`, `rating`, `profilepic`, `description` from `Profile` where `id`='$account'";
+        $profile = mysqli_query($con,$sql);
+        while ($row = mysqli_fetch_array($profile)) {
+            $name = $row['name'];
+            $title = $row['title'];
+            $projects = $row['projects'];
+            $rating = $row['rating'];
+            $dp = $row['profilepic'];
+            $description = $row['description'];
         }
+
+        // Fetching posts
+        $sql = "SELECT `wall`, `content` FROM `Post` WHERE `authorid`='$account'";
+        $posts = mysqli_query($con,$sql);
+        $post_view='';
+        if(mysqli_num_rows($posts) > 0)
+        {
+            while ($row = mysqli_fetch_array($posts)){
+                $wall = $row['wall'];
+                $content= $row['content'];
+                $post_view.='<table id="freelancer"><tr><td id="freelancer-bg" style="background-image: url(';
+                $post_view.=$wall.')"></td></tr><tr><td id="freelancer-discription"><div id="freelancer-word">';
+                $post_view.=$content.'</div></td></tr></table>';
+            }
+            // Check point
+        }
+
+        // Fetching Reviews
+        $sql = "SELECT Profile.name, Profile.profilepic, Review.rating, Review.review FROM `Review` INNER JOIN Profile ON Profile.id = Review.author WHERE Review.account='$account' ORDER BY Review.Time";
+        $reviews = mysqli_query($con,$sql);
+        $reviews_view='';
+        $count = 0;
+        $total = 0;
+        if(mysqli_num_rows($reviews) > 0)
+        {
+            $reviews_view='<main class="reviews">';
+            while ($row = mysqli_fetch_array($reviews)){
+                $authorpic= $row['profilepic'];
+                $author= $row['name'];
+                $rating= $row['rating'];
+                $rev= $row['review'];
+                $reviews_view.='<div class="review-content"><div class="author-details"><div class="author-dp"><img src="';
+                $reviews_view.=$authorpic.'"></div><div class="author-name">';
+                $reviews_view.=$author.'</div><div class="rating">';
+                $reviews_view.=$rating.'.0</div></div><div class="review">';
+                $reviews_view.=$rev.'</div></div>';
+                $count+=1;
+                $total+=$rating;
+            }
+            $reviews_view.='</main>';
+            $avg_rating=round($total/$count,2);
+            $sql= "UPDATE `Profile` SET `rating` = '$avg_rating' WHERE `id`='$account'";
+            mysqli_query($con,$sql);
+            if(!mysqli_query($con,$sql)){
+                die('Error: '.mysqli_error($con));
+            }
+        }
+
+        // Post a review
+        $author =$myid;
+        
+        if ($_POST){
+            $review =mysqli_real_escape_string($con,$_POST["rev"]);
+            $rat = $_POST['rating'];
+        
+            do{
+                $reviewId = generateId();
+                $sql = "SELECT * FROM `Review` WHERE `id` = '$reviewId'";
+                $revs=mysqli_query($con,$sql);
+            }while(mysqli_num_rows($revs)>0);
+
+            $sql= "INSERT INTO `Review`(`id`, `rating`, `review`, `account`, `author`) VALUES ('$reviewId','$rat','$review','$account','$author')";
+            if(!mysqli_query($con,$sql)){
+                die('Error: '.mysqli_error($con));
+            }
+    }
+
+    }else{
+        // My Profile
+
+        $profile_options='<a href="post.php" class="btn">Post</a> <a href="edit-profile.php" class="btn">Edit</a>';
+
+        // fetching profile details
+        $sql = "SELECT `name`, `title`, `projects`, `rating`, `profilepic`, `description` from `Profile` where `id`='$myid'";
+        $profile = mysqli_query($con,$sql);
+        while ($row = mysqli_fetch_array($profile)) {
+            $name = $row['name'];
+            $title = $row['title'];
+            $projects = $row['projects'];
+            $rating = $row['rating'];
+            $dp = $row['profilepic'];
+            $description = $row['description'];
+        }
+
+        // Fetching posts
+        $sql = "SELECT `wall`, `content` FROM `Post` WHERE `authorid`='$myid'";
+        $posts = mysqli_query($con,$sql);
+        $post_view='';
+        if(mysqli_num_rows($posts) > 0)
+        {
+            while ($row = mysqli_fetch_array($posts)){
+                $wall = $row['wall'];
+                $content= $row['content'];
+                $post_view.='<table id="freelancer"><tr><td id="freelancer-bg" style="background-image: url(';
+                $post_view.=$wall.')"></td></tr><tr><td id="freelancer-discription"><div id="freelancer-word">';
+                $post_view.=$content.'</div></td></tr></table>';
+            }
+            // Check point
+        }
+
+
+        // Fetching Reviews
+        $sql = "SELECT Profile.name, Profile.profilepic, Review.rating, Review.review FROM `Review` INNER JOIN Profile ON Profile.id = Review.author WHERE Review.account='$myid' ORDER BY Review.Time";
+        $reviews = mysqli_query($con,$sql);
+        $reviews_view='';
+        $count = 0;
+        $total = 0;
+        if(mysqli_num_rows($reviews) > 0)
+        {
+            $reviews_view='<main class="reviews">';
+            while ($row = mysqli_fetch_array($reviews)){
+                $authorpic= $row['profilepic'];
+                $author= $row['name'];
+                $rating= $row['rating'];
+                $rev= $row['review'];
+                $reviews_view.='<div class="review-content"><div class="author-details"><div class="author-dp"><img src="';
+                $reviews_view.=$authorpic.'"></div><div class="author-name">';
+                $reviews_view.=$author.'</div><div class="rating">';
+                $reviews_view.=$rating.'.0</div></div><div class="review">';
+                $reviews_view.=$rev.'</div></div>';
+                $count+=1;
+                $total+=$rating;
+            }
+            $reviews_view.='</main>';
+            $avg_rating=round($total/$count,2);
+            $sql= "UPDATE `Profile` SET `rating` = '$avg_rating' WHERE `id`='$account'";
+            mysqli_query($con,$sql);
+            if(!mysqli_query($con,$sql)){
+                die('Error: '.mysqli_error($con));
+            }
+        }
+    
     }
 
 }
@@ -156,9 +245,7 @@ else{
                         <span>PROJECTS: <?php echo $projects?></span>
                         <span>RATING: <?php echo $avg_rating?></span>
                     </div>
-                    <button id="connect" class="btn">Connect</button>
-                    <a href="post.php" class="btn">Post</a>
-                    <a href="edit-profile.php" class="btn">Edit</a>
+                    <?php echo $profile_options?>
                 </div>
             </main>
             <!-- Summary -->
@@ -179,24 +266,7 @@ else{
             </main>
             <!-- Reviews -->
             <?php echo $reviews_view?>
-            <form name="review-form" class="review-form" method="post">
-                <h5>Rating</h5>
-                <fieldset class="star-rating">
-                    <input type="radio" id="star5" name="rating" value=5.0 required/>
-                    <label for="star5" title="5 stars"></label>
-                    <input type="radio" id="star4" name="rating" value=4.0 />
-                    <label for="star4" title="4 stars"></label>
-                    <input type="radio" id="star3" name="rating" value="3" />
-                    <label for="star3" title="3 stars"></label>
-                    <input type="radio" id="star2" name="rating" value="2" />
-                    <label for="star2" title="2 stars"></label>
-                    <input type="radio" id="star1" name="rating" value="1" />
-                    <label for="star1" title="1 star"></label>
-                </fieldset>
-                <h5>Add a review</h5>
-                <textarea class="profile-editor" id="rev" name="rev" required></textarea>
-                <button type="submit" class="btn" name="add-review" id="add-review">Save</button>
-            </form>
+            <?php echo $review_section?>
         </section>
     </body>
 </html>

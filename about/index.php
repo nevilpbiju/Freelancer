@@ -1,3 +1,29 @@
+<?php
+include '../config.php';
+
+session_start();
+
+if(isset($_SESSION['user'])){
+
+    $myid = $_SESSION['user'];
+
+    $navbar='<ul class="nav-menu"><li><a href="../message/" class="menu-item">Chat</a></li>
+    <li><a href="../profile/" class="menu-item">Profile</a></li>
+    <li><a href="../contact-us/" class="menu-item">Contact Us</a></li>
+    <li><a href="../logout/" class="menu-item">Logout</a></li></ul>';
+}
+else{
+    $navbar='<ul class="nav-menu">
+    <li><a href="../contact-us/" class="menu-item">Contact Us</a></li>
+    <li><a href="../login/" class="menu-item">Login</a></li>
+    <li><a href="../register/" class="menu-item">Join</a></li></ul>';
+}
+
+// Update details
+
+?>
+
+
 <!DOCTYPE html>
     <head>
         <title>SoloTreff</title>
@@ -22,16 +48,7 @@
                     <input type="text" autocomplete="off" name="search"  id="search" placeholder="Search..." required>
                     <!-- <button type="submit"></button> -->
                 </form>
-                <ul class="nav-menu">
-                    <!-- Chat -->
-                    <li><a href="../message/" class="menu-item">Chat</a></li>
-                    <!-- Profile -->
-                    <li><a href="../profile/" class="menu-item">Profile</a></li>
-                    <!-- Contact Us -->
-                    <li><a href="../contact-us" class="menu-item">Contact us</a></li>
-                    <!-- Logout -->
-                    <li><a href="../logout/" class="menu-item">Logout</a></li>
-                </ul>
+                <?php echo $navbar?>
             </nav>
         </header>
         <section class="contact-section">

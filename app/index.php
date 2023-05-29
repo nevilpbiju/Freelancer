@@ -1,3 +1,90 @@
+<?php
+include '../config.php';
+
+session_start();
+
+if(isset($_SESSION['user'])){
+    $myid = $_SESSION['user'];
+
+    // Fetching posts
+    // SELECT Profile.name, Profile.profilepic, Review.rating, Review.review FROM `Review` INNER JOIN Profile ON Profile.id = Review.author WHERE Review.account='$myid' ORDER BY Review.Time"
+    $sql = "SELECT Post.content, Post.wall, Profile.id, Profile.name, Profile.profilepic, Profile.title FROM `Post` JOIN `Profile` ON Profile.id=Post.authorid ORDER BY Post.time DESC LIMIT 10";
+    $posts = mysqli_query($con,$sql);
+    
+    // $post_view='';
+    if(mysqli_num_rows($posts) > 0)
+    {
+        while ($row = mysqli_fetch_array($posts)){
+            $acc = $row['id'];
+            $wall = $row['wall'];
+            $author=$row['name'];
+            $author_title=$row['title'];
+            $author_img=$row['profilepic'];
+            $content= $row['content'];
+            $post_view.='<table id="freelancer"><tr><td id="freelancer-bg" style="background-image: url(';
+            $post_view.=$wall.')"></td></tr><tr><td id="freelancer-discription"><div id="freelancer-details"><img src="';
+            $post_view.=$author_img.'" id="freelancer-img"><div id="freelancer-des"><a href="../profile/index.php?account=';
+            $post_view.=$acc.'" id="freelancer-name">';
+            $post_view.=$author.'</a><div id="freelancer-title">';
+            $post_view.=$author_title.'</div></div></div><div id="freelancer-word">';
+            $post_view.=$content.'</div></td></tr></table>';
+        }
+    }
+
+    // Fetching Profiles
+    $sql = "SELECT Profile.id, Profile.name, Profile.profilepic, Profile.title, Profile.description FROM `Profile` WHERE Profile.id!='$myid' LIMIT 10";
+    $profiles = mysqli_query($con,$sql);
+    
+    if(mysqli_num_rows($profiles) > 0)
+    {
+        while ($row = mysqli_fetch_array($profiles)){
+            $wall = "../files/Data.jpg";
+            $author=$row['name'];
+            $author_title=$row['title'];
+            $author_img=$row['profilepic'];
+            $acc=$row['id'];
+            $content= $row['description'];
+            $prof_view.='<table id="freelancer"><tr><td id="freelancer-bg" style="background-image: url(';
+            $prof_view.=$wall.')"></td></tr><tr><td id="freelancer-discription"><div id="freelancer-details"><img src="';
+            $prof_view.=$author_img.'" id="freelancer-img"><div id="freelancer-des"><a href="../profile/index.php?account=';
+            $prof_view.=$acc.'"id="freelancer-name">';
+            $prof_view.=$author.'</a><div id="freelancer-title">';
+            $prof_view.=$author_title.'</div></div></div><div id="freelancer-word">';
+            $prof_view.=$content.'</div></td></tr></table>';
+        }
+    }
+
+    // Top accounts
+    $sql = "SELECT Profile.id, Profile.name, Profile.profilepic, Profile.title, Profile.description FROM `Profile` ORDER BY Profile.rating DESC LIMIT 10";
+    $profiles = mysqli_query($con,$sql);
+    
+    if(mysqli_num_rows($profiles) > 0)
+    {
+        while ($row = mysqli_fetch_array($profiles)){
+            $wall = "../files/Data.jpg";
+            $author=$row['name'];
+            $author_title=$row['title'];
+            $author_img=$row['profilepic'];
+            $acc=$row['id'];
+            $content= $row['description'];
+            $rate_prof_view.='<table id="freelancer"><tr><td id="freelancer-bg" style="background-image: url(';
+            $rate_prof_view.=$wall.')"></td></tr><tr><td id="freelancer-discription"><div id="freelancer-details"><img src="';
+            $rate_prof_view.=$author_img.'" id="freelancer-img"><div id="freelancer-des"><a href="../profile/index.php?account=';
+            $rate_prof_view.=$acc.'"id="freelancer-name">';
+            $rate_prof_view.=$author.'</a><div id="freelancer-title">';
+            $rate_prof_view.=$author_title.'</div></div></div><div id="freelancer-word">';
+            $rate_prof_view.=$content.'</div></td></tr></table>';
+        }
+    }
+}
+else{
+    header("Location: ../login/");
+}
+
+
+?>
+
+
 <!DOCTYPE html>
     <head>
         <title>SoloTreff</title>
@@ -36,21 +123,9 @@
         </header>
         <section id="listing" class="listing">
             <div class="category-table">
-                <div class="category-label">Top Rated</div>
+                <div class="category-label"></div>
                 <div class="category-group">
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg" style="background-image: url(../files/graphic.jpg)"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <a href="nevilpbiju" id="freelancer-name">Nevil P Biju</a>
-                                    <div id="freelancer-title">UI UX Designer</div>
-                                </div>
-                            </div>
-                            <div id="freelancer-word">I will be your professional UI UX Designer</div>
-                        </td></tr>
-                    </table>
+                <?php echo $post_view?>
                     <table id="freelancer">
                         <tr><td id="freelancer-bg" style="background-image: url(../files/Data.jpg)"></td></tr>
                         <tr><td id="freelancer-discription">
@@ -64,185 +139,19 @@
                             <div id="freelancer-word">I will be your SEO</div>
                         </td></tr>
                     </table>
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg" style="background-image: url(../files/ui.jpg)"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">UI UX Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional UI UX Designer</div>
-                        </td></tr>
-                    </table>
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg" style="background-image: url(../files/design.jpg)"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">UI UX Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional UI UX Designer</div>
-                        </td></tr>
-                    </table>
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg" style="background-image: url(../files/pad.jpg)"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">UI UX Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional UI UX Designer</div>
-                        </td></tr>
-                    </table>
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg" style="background-image: url(../files/Data.jpg)"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">Data Analyst</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional Data Analyst</div>
-                        </td></tr>
-                    </table>
+
+                </div>
+            </div>
+            <div class="category-table">
+                <div class="category-label">Top Rated</div>
+                <div class="category-group">
+                    <?php echo $rate_prof_view?>
                 </div>
             </div>
             <div class="category-table">
                 <div class="category-label"></div>
                 <div class="category-group">
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">Graphic Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional graphic designer</div>
-                        </td></tr>
-                    </table>
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">Graphic Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional graphic designer</div>
-                        </td></tr>
-                    </table>
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">Graphic Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional graphic designer</div>
-                        </td></tr>
-                    </table>
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">Graphic Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional graphic designer</div>
-                        </td></tr>
-                    </table>
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">Graphic Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional graphic designer</div>
-                        </td></tr>
-                    </table>
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">Graphic Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional graphic designer</div>
-                        </td></tr>
-                    </table>
-                </div>
-            </div>
-            <div class="category-table">
-                <div class="category-label">New</div>
-                <div class="category-group">
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg" style="background-image: url(../files/pad.jpg)"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">UI UX Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional UI UX Designer</div>
-                        </td></tr>
-                    </table>
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg" style="background-image: url(../files/ui.jpg)"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">UI UX Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional UI UX Designer</div>
-                        </td></tr>
-                    </table>
-                    <table id="freelancer">
-                        <tr><td id="freelancer-bg" style="background-image: url(../files/design.jpg)"></td></tr>
-                        <tr><td id="freelancer-discription">
-                            <div id="freelancer-details">
-                                <img src="../files/person.png" id="freelancer-img">
-                                <div id="freelancer-des">
-                                    <div id="freelancer-name">Nevil P Biju</div>
-                                    <div id="freelancer-title">UI UX Designer</div>
-                                </div>         
-                            </div>
-                            <div id="freelancer-word">I will be your professional UI UX Designer</div>
-                        </td></tr>
-                    </table>
+                    <?php echo $prof_view?>
                 </div>
             </div>
         </section>
