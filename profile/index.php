@@ -22,9 +22,14 @@ if(isset($_SESSION['user'])){
 
         $account = $_GET['account'];
 
-        $profile_options='<button id="connect" class="btn">Connect</button>';
-
-        $review_section='<form name="review-form" class="review-form" method="post">
+        $sql = "SELECT * FROM `Connection` WHERE (user1='$myid' AND user2='$account') OR (user1='$account' AND user2='$myid') ";
+        $conns = mysqli_query($con,$sql);
+        if(mysqli_num_rows($conns) == 0)
+        {
+            $profile_options='<button id="connect" class="btn" onclick="runSQL()">Connect</button>';
+            $review_section='<div class="con-mgs">Connect to write a review</div>';
+        }else{
+            $review_section='<form name="review-form" class="review-form" method="post">
         <h5>Rating</h5>
         <fieldset class="star-rating">
             <input type="radio" id="star5" name="rating" value=1.0 required/>
@@ -42,6 +47,8 @@ if(isset($_SESSION['user'])){
         <textarea class="profile-editor" id="rev" name="rev" required></textarea>
         <button type="submit" class="btn" name="add-review" id="add-review">Save</button>
     </form>';
+        }
+
 
         // fetching profile details
         $sql = "SELECT `name`, `title`, `projects`, `rating`, `profilepic`, `description` from `Profile` where `id`='$account'";
@@ -119,7 +126,7 @@ if(isset($_SESSION['user'])){
             if(!mysqli_query($con,$sql)){
                 die('Error: '.mysqli_error($con));
             }
-    }
+        }
 
     }else{
         // My Profile
@@ -216,7 +223,7 @@ else{
         <header>
             <nav class="navigation-bar">
                 <a href="../app/"><img src="../files/black-logo.png" class="logo"></a>
-                <form name="search-form" class="search-form" method="post">
+                <form name="search-form" class="search-form" method="post" action="../search/">
                     <input type="text" autocomplete="off" name="search"  id="search" placeholder="Search..." required>
                     <!-- <button type="submit"></button> -->
                 </form>
@@ -242,9 +249,10 @@ else{
                     <h5 class="profile-name"><?php echo $name?></h5>
                     <p class="profile-title" ><?php echo $title?></p>
                     <div class="profile-points">
-                        <span>PROJECTS: <?php echo $projects?></span>
+                        <span>CONNECTIONS: <?php echo $projects?></span>
                         <span>RATING: <?php echo $avg_rating?></span>
                     </div>
+                    <!-- <button id="connect" class="btn" onclick="runSQL()">Try Connect</button> -->
                     <?php echo $profile_options?>
                 </div>
             </main>
@@ -268,5 +276,22 @@ else{
             <?php echo $reviews_view?>
             <?php echo $review_section?>
         </section>
+        <script>
+            function runSQL() {
+                // Value to be passed to the PHP script
+                var value = "<?php echo $account?>";
+                // Make an AJAX request to the PHP script with the value as a parameter
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // Handle the response from the PHP script
+                        console.log(this.responseText);
+                    }
+                };
+                xhttp.open("GET", "connect.php?acc=" + encodeURIComponent(value), true);
+                xhttp.send();
+            }
+
+        </script>
     </body>
 </html>

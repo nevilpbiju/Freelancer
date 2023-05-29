@@ -44,12 +44,6 @@ if(isset($_SESSION['user'])){
     if(mysqli_num_rows($reviews) > 0)
     {
 
-        
-                 
-                 
-            
-
-        
         $reviews_view='<main class="reviews">';
         while ($row = mysqli_fetch_array($reviews)){
             $authorpic= $row['profilepic'];
@@ -93,7 +87,7 @@ else{
         <header>
             <nav class="navigation-bar">
                 <a href="../app/"><img src="../files/black-logo.png" class="logo"></a>
-                <form name="search-form" class="search-form" method="post">
+                <form name="search-form" class="search-form" method="post" action="../search/">
                     <input type="text" autocomplete="off" name="search"  id="search" placeholder="Search..." required>
                     <!-- <button type="submit"></button> -->
                 </form>
@@ -103,7 +97,7 @@ else{
                     <!-- Profile -->
                     <li><a href="../profile/" class="menu-item">Profile</a></li>
                     <!-- Contact Us -->
-                    <li><a href="../contact.php" class="menu-item">Contact us</a></li>
+                    <li><a href="../contact-us" class="menu-item">Contact us</a></li>
                     <!-- Logout -->
                     <li><a href="../logout/" class="menu-item">Logout</a></li>
                 </ul>

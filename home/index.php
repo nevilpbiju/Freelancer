@@ -20,9 +20,11 @@
                 </ul>
             </div>
             <div id="search-area">
+                <form method="post" action="../search/">
                 <div id="search-head">Find the perfect freelancer for your business</div>
                 <input type="text" placeholder="Try 'graphic designer'" id="search-text" class="search-value"/>
                 <button id="search-btn">Search</button>
+                </form>
                 <div id="quotes">“Develop an Attitude of Gratitude. Say Thank You to everyone you meet, for everything they do for you”<p id="author">-- Brian Tracy</p></div>
             </div>
             <img src="../files/laptop-graphics.png" id="home-graphics">

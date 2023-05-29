@@ -6,24 +6,58 @@ session_start();
 if(isset($_SESSION['user'])){
     $myid = $_SESSION['user'];
 
-    // Fetching Profiles
-    $sql = "SELECT Profile.name, Profile.profilepic, Profile.title, Profile.description FROM `Profile` WHERE Profile.id!='$myid' LIMIT 10";
-    $profiles = mysqli_query($con,$sql);
-    
-    if(mysqli_num_rows($profiles) > 0)
-    {
-        while ($row = mysqli_fetch_array($profiles)){
-            $wall = "../files/Data.jpg";
-            $author=$row['name'];
-            $author_title=$row['title'];
-            $author_img=$row['profilepic'];
-            $content= $row['description'];
-            $prof_view.='<table id="freelancer"><tr><td id="freelancer-bg" style="background-image: url(';
-            $prof_view.=$wall.')"></td></tr><tr><td id="freelancer-discription"><div id="freelancer-details"><img src="';
-            $prof_view.=$author_img.'" id="freelancer-img"><div id="freelancer-des"><div id="freelancer-name">';
-            $prof_view.=$author.'</div><div id="freelancer-title">';
-            $prof_view.=$author_title.'</div></div></div><div id="freelancer-word">';
-            $prof_view.=$content.'</div></td></tr></table>';
+    // Fetch Result
+    if ($_POST){
+        $query =mysqli_real_escape_string($con,$_POST["search"]);
+        $sql = "SELECT Profile.id, Profile.name, Profile.profilepic, Profile.title, Profile.projects, Profile.rating FROM `Profile` WHERE Profile.name LIKE '%".$query."%' OR Profile.title LIKE '%".$query."%' LIMIT 25";
+        $profiles = mysqli_query($con,$sql);
+        
+        if(mysqli_num_rows($profiles) > 0)
+        {
+            while ($row = mysqli_fetch_array($profiles)){
+                $author=$row['name'];
+                $author_title=$row['title'];
+                $acc=$row['id'];
+                $author_img=$row['profilepic'];
+                $projects=$row['projects'];
+                $rating=$row['rating'];
+
+                $prof_view.='<div class="product-listing-m gray-bg"><div class="product-listing-img"><img src="';
+                $prof_view.=$author_img.'" class="img-responsive" id="resp-img"></div><div class="product-listing-content"><h5><a href="../profile/index.php?account=';
+                $prof_view.=$acc.'" class="display-name">';
+                $prof_view.=$author.'</a></h5><p class="display-title">';
+                $prof_view.=$author_title.'</p><ul><li>CONNECTIONS: ';
+                $prof_view.=$projects.'</li><li>RATING: ';
+                $prof_view.=$rating.'</li></ul><a href="../profile/index.php?account=';
+                $prof_view.=$acc.'" class="btn">View</a></div></div>';
+            }
+        }
+    }else{
+        
+        // Fetching Profiles
+        $sql = "SELECT Profile.id, Profile.name, Profile.profilepic, Profile.title, Profile.projects, Profile.rating FROM `Profile` WHERE Profile.id!='$myid' LIMIT 25";
+        $profiles = mysqli_query($con,$sql);
+        
+        if(mysqli_num_rows($profiles) > 0)
+        {
+
+            while ($row = mysqli_fetch_array($profiles)){
+                $author=$row['name'];
+                $author_title=$row['title'];
+                $acc=$row['id'];
+                $author_img=$row['profilepic'];
+                $projects=$row['projects'];
+                $rating=$row['rating'];
+
+                $prof_view.='<div class="product-listing-m gray-bg"><div class="product-listing-img"><img src="';
+                $prof_view.=$author_img.'" class="img-responsive" id="resp-img"></div><div class="product-listing-content"><h5><a href="../profile/index.php?account=';
+                $prof_view.=$acc.'" class="display-name">';
+                $prof_view.=$author.'</a></h5><p class="display-title">';
+                $prof_view.=$author_title.'</p><ul><li>CONNECTIONS: ';
+                $prof_view.=$projects.'</li><li>RATING: ';
+                $prof_view.=$rating.'</li></ul><a href="../profile/index.php?account=';
+                $prof_view.=$acc.'" class="btn">View</a></div></div>';
+            }
         }
     }
 }
@@ -72,7 +106,8 @@ else{
             </nav>
         </header>
         <section id="listing" class="listing">
-            <div class="product-listing-m gray-bg">
+            <?php echo $prof_view?>
+            <!-- <div class="product-listing-m gray-bg">
                 <div class="product-listing-img">
                     <img src="https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="img-responsive" id="resp-img">  
                 </div>
@@ -83,37 +118,9 @@ else{
                         <li>PROJECTS: 0</li>
                         <li>RATING 0.0</li>
                     </ul>
-                    <a href="#" class="btn">Connect<span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
+                    <a href="#" class="btn">Connect</a>
                 </div>
-            </div>
-            <div class="product-listing-m gray-bg">
-                <div class="product-listing-img">
-                    <img src="https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="img-responsive" id="resp-img">  
-                </div>
-                <div class="product-listing-content">
-                    <h5><a href="#" class="display-name">Nevil P Biju</a></h5>
-                    <p class="display-title" >Photographer</p>
-                    <ul>
-                        <li>PROJECTS: 0</li>
-                        <li>RATING 0.0</li>
-                    </ul>
-                    <a href="#" class="btn">Connect<span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
-                </div>
-            </div>
-            <div class="product-listing-m gray-bg">
-                <div class="product-listing-img">
-                    <img src="https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="img-responsive" id="resp-img">  
-                </div>
-                <div class="product-listing-content">
-                    <h5><a href="#" class="display-name">Nevil P Biju</a></h5>
-                    <p class="display-title" >Photographer</p>
-                    <ul>
-                        <li>PROJECTS: 0</li>
-                        <li>RATING 0.0</li>
-                    </ul>
-                    <a href="#" class="btn">Connect<span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
-                </div>
-            </div>
+            </div> -->
         </section>
     </body>
 </html>

@@ -250,3 +250,10 @@
 #add-review{
     margin: 25px auto;
 }
+
+.con-mgs{
+    text-align: center;
+    color: #444;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
