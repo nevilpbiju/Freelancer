@@ -6,7 +6,9 @@ session_start();
 if(isset($_SESSION['user'])){
     header("Location: ../app/");
 }
-
+elseif(isset($_SESSION['admin'])){
+    header("Location:../admin/");
+}
 else{
     if ($_POST){
         $error="style='background-color: #ffffffaa;'";
@@ -29,6 +31,21 @@ else{
             }
         }
         else{
+            $sql= "SELECT `password` FROM `Admin` WHERE id = '$user'";
+            $login_result = mysqli_query($con,$sql);
+            if(mysqli_num_rows($login_result)>0){
+                while($row = mysqli_fetch_array($login_result))
+                {
+                    $passwordHash = $row['password'];
+                }
+                if(!password_verify($password,$passwordHash)){
+                    $error="style='background-color: #ff8181b0;'";
+                }
+                else{
+                    $_SESSION['admin']=$user;
+                    header("Location: ../admin/");
+                }
+            }
             echo '<script>if (confirm("User does not exist, Create a new account?")) {
                 window.location.replace("../register/");
             }</script>';

@@ -23,5 +23,8 @@
     // mysqli_query($con,$sql);
     // $sql="CREATE TABLE `SoloTreff`.`mail` (`id` INT NOT NULL AUTO_INCREMENT , `email` VARCHAR(50) NOT NULL , `name` VARCHAR(50) NOT NULL , `msg` VARCHAR(1000) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
     // mysqli_query($con,$sql);
+    // $sql="CREATE TABLE `SoloTreff`.`Admin` (`id` VARCHAR(50) NOT NULL , `password` VARCHAR(50) NOT NULL , `lastLogin` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+    // mysqli_query($con,$sql);
+    //  
      
 ?>

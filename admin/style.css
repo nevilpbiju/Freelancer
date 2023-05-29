@@ -1,0 +1,33 @@
+.mails{
+    position: relative;
+    top: 150px;
+}
+
+.mails table{
+    width: 60%;
+    margin: 0 auto;
+    border: .2px solid #444;
+    margin-bottom: 250px;
+}
+
+.mails table tr:hover{
+    background-color: #a1a1a1;
+}
+
+th{
+    color: black;
+    background-color: #a1a1a1;
+}
+
+.mails table tr *{
+    padding: 15px;
+    text-align: center;
+    width: 20%;
+    color: #1b1b1b;
+    border-right: .2px solid #444;
+    border-bottom: .2px solid #444;
+}
+
+.mails table tr *:last-child{
+    width: 40%;
+}

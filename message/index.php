@@ -1,14 +1,18 @@
 <!DOCTYPE html>
     <head>
-        <title>SOLOTREFF</title>
-        <link href="style.css" rel="stylesheet" type="text/css">
-        <link href="../navigation.css" rel="stylesheet" type="text/css">
+        <title>SoloTreff</title>
+	    <meta charset="utf-8">
+	    <!-- Custom style -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="../style/navigation.css">
 
-        <link rel="icon" href="../files/icon.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Wendy+One&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="../style/bootstrap.min.css" type="text/css">
+
         <script>
             window.addEventListener('load', function() {
                 var chatBox = document.getElementById("chat-box");
@@ -19,14 +23,25 @@
     <body>
         <!-- APP -->
         <section id="s1" class="app-screen">
-            <div id="navbar">
-                <img src="../files/icon.png" class="icon">
-                <a href="../app/" class="nav-button"><img src="../files//Home.png" class="nav-logo"></a>
-                <a href="#" class="nav-button"><img src="../files/message.png" class="nav-logo"></a>
-                <a href="../search/" class="nav-button"><img src="../files/connections.png" class="nav-logo"></a>
-                <a href="../logout/" class="nav-button"><img src="../files/exit.png" class="nav-logo"></a>
-                <a href="../profile/" class="nav-button"><img src="https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="nav-logo" id="nav-dp"></a>
-            </div>
+        <header>
+            <nav class="navigation-bar">
+                <a href="../app/"><img src="../files/black-logo.png" class="logo"></a>
+                <!-- <form name="search-form" class="search-form" method="post" action="../search/">
+                    <input type="text" autocomplete="off" name="search"  id="search" placeholder="Search..." required>
+                    <button type="submit"></button>
+                </form> -->
+                <ul class="nav-menu">
+                    <!-- Chat -->
+                    <li><a href="../message/" class="menu-item">Chat</a></li>
+                    <!-- Profile -->
+                    <li><a href="../profile/" class="menu-item">Profile</a></li>
+                    <!-- Contact Us -->
+                    <li><a href="../contact-us" class="menu-item">Contact us</a></li>
+                    <!-- Logout -->
+                    <li><a href="../logout/" class="menu-item">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
             <table>
                 <tr>
                     <td id="list-pos">

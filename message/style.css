@@ -1,29 +1,11 @@
-*{
-    padding: 0;
-    margin: 0;
-    font-family: 'Jost', sans-serif;
-    color: white;
-}
-
-.app-screen{
-    height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-color: #ededed;
-}
-
 #list-pos{
     height: calc(100% - 20px);
     border-radius: 3px;
     width: 25vw;
     position: fixed;
-    top: 0;
-    left: calc(5vw + 10px);
+    top: 100px;
     margin: 10px;
     background-color: white;
-    box-shadow: .5px 0px 5px 1px grey;
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -40,11 +22,9 @@
     width: calc(25vw - 30px);
     margin: 10px;
     height: 40px;
-    color: #000015;
-    outline: none;
-    border-radius: 3px;
-    border: none;
-    background-color: #ededed;
+    background: white none repeat scroll 0 0;
+    color: #111;
+    border: .2px solid #888888;
     padding-left: 10px;
 }
 
@@ -58,6 +38,10 @@
     border-top: .5px solid #ededed;
     overflow-y: hidden;
     outline: none;
+}
+
+#chat-person:hover{
+    background-color: #ededed;
 }
 
 #p-dp{
@@ -82,13 +66,11 @@
     /* display: none; */
     height: calc(100% - 20px);
     border-radius: 3px;
-    width: calc(100% - (30vw + 20px));
+    width: calc(100% - (25vw + 20px));
     position: fixed;
     top: 0;
-    left: calc(30vw + 10px );
+    left: calc(25vw + 10px );
     margin: 10px;
-    /* background-color: white;
-    box-shadow: .5px 0px 5px 1px grey; */
 }
 
 #title{
@@ -112,7 +94,6 @@
 .details{
     position: relative;
     top: 3vh;
-    /* transform: translate(0,-5vh); */
 }
 
 .details span{
@@ -125,11 +106,9 @@
 .input-area{
     height: fit-content;
     background-color: white;
-    box-shadow: .5px 0px 5px 1px grey;
-    width: calc(100% - 20px);
+    border: .2px solid #888888;
     margin: 10px;
     align-items: center;
-    border-radius: 3px;
 }
 
 
@@ -138,7 +117,7 @@
     width: calc(100% - 70px);
     margin: 10px;
     outline: none;
-    background-color: #ededed;
+    /* background-color: #ededed; */
     border: none;
     border-radius: 3px;
     padding-left: 10px;
@@ -169,17 +148,12 @@
     width: 0px;
 }
 
-/* #send-btn img{
-    width: auto;
-    height: 40px;
-    margin: 10px;
-} */
 
 #default-chat{
     display: none;
     height: calc(100% - 20px);
     border: none;
-    width: calc(100% - (30vw + 20px));
+    width: calc(100% - (25vw + 20px));
     position: fixed;
     top: 0;
     left: calc(30vw + 10px );
@@ -220,7 +194,7 @@
 
 .incoming{
     width: 60%;
-    background-color: #ffffff;
+    background-color: #f0abab;
     border-radius: 3px;
     margin: 10px;
     border-top-left-radius: 0;

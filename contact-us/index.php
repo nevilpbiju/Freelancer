@@ -35,7 +35,7 @@ else{
 // Update details
 if ($_POST){
     $name =mysqli_real_escape_string($con,$_POST["name"]);
-    $title =mysqli_real_escape_string($con,$_POST["email"]);
+    $email =mysqli_real_escape_string($con,$_POST["email"]);
     $msg =mysqli_real_escape_string($con,$_POST["msg"]);
     $sql= "INSERT INTO `mail`(`email`, `name`, `msg`) VALUES ('$email','$name','$msg')";
     if(!mysqli_query($con,$sql)){
