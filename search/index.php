@@ -6,6 +6,10 @@ session_start();
 if(isset($_SESSION['user'])){
     unset($_SESSION['inbox']);
     $myid = $_SESSION['user'];
+    $navbar='<ul class="nav-menu"><li><a href="../message/" class="menu-item">Chat</a></li>
+    <li><a href="../profile/" class="menu-item">Profile</a></li>
+    <li><a href="../contact-us/" class="menu-item">Contact Us</a></li>
+    <li><a href="../logout/" class="menu-item">Logout</a></li></ul>';
 
     // Fetch Result
     if ($_POST){
@@ -63,7 +67,64 @@ if(isset($_SESSION['user'])){
     }
 }
 else{
-    header("Location: ../login/");
+    $navbar='<ul class="nav-menu">
+    <li><a href="../home/" class="menu-item">Home</a></li>
+    <li><a href="../contact-us/" class="menu-item">Contact Us</a></li>
+    <li><a href="../login/" class="menu-item">Login</a></li>
+    <li><a href="../register/" class="menu-item">Join</a></li></ul>';
+    if ($_POST){
+        $query =mysqli_real_escape_string($con,$_POST["search"]);
+        $sql = "SELECT Profile.id, Profile.name, Profile.profilepic, Profile.title, Profile.projects, Profile.rating FROM `Profile` WHERE Profile.name LIKE '%".$query."%' OR Profile.title LIKE '%".$query."%' LIMIT 25";
+        $profiles = mysqli_query($con,$sql);
+        
+        if(mysqli_num_rows($profiles) > 0)
+        {
+            while ($row = mysqli_fetch_array($profiles)){
+                $author=$row['name'];
+                $author_title=$row['title'];
+                $acc=$row['id'];
+                $author_img=$row['profilepic'];
+                $projects=$row['projects'];
+                $rating=$row['rating'];
+
+                $prof_view.='<div class="product-listing-m gray-bg"><div class="product-listing-img"><img src="';
+                $prof_view.=$author_img.'" class="img-responsive" id="resp-img"></div><div class="product-listing-content"><h5><a href="../profile/index.php?account=';
+                $prof_view.=$acc.'" class="display-name">';
+                $prof_view.=$author.'</a></h5><p class="display-title">';
+                $prof_view.=$author_title.'</p><ul><li>CONNECTIONS: ';
+                $prof_view.=$projects.'</li><li>RATING: ';
+                $prof_view.=$rating.'</li></ul><a href="../profile/index.php?account=';
+                $prof_view.=$acc.'" class="btn">Login to View</a></div></div>';
+            }
+        }
+    }else{
+        
+        // Fetching Profiles
+        $sql = "SELECT Profile.id, Profile.name, Profile.profilepic, Profile.title, Profile.projects, Profile.rating FROM `Profile` LIMIT 25";
+        $profiles = mysqli_query($con,$sql);
+        
+        if(mysqli_num_rows($profiles) > 0)
+        {
+
+            while ($row = mysqli_fetch_array($profiles)){
+                $author=$row['name'];
+                $author_title=$row['title'];
+                $acc=$row['id'];
+                $author_img=$row['profilepic'];
+                $projects=$row['projects'];
+                $rating=$row['rating'];
+
+                $prof_view.='<div class="product-listing-m gray-bg"><div class="product-listing-img"><img src="';
+                $prof_view.=$author_img.'" class="img-responsive" id="resp-img"></div><div class="product-listing-content"><h5><a href="../profile/index.php?account=';
+                $prof_view.=$acc.'" class="display-name">';
+                $prof_view.=$author.'</a></h5><p class="display-title">';
+                $prof_view.=$author_title.'</p><ul><li>CONNECTIONS: ';
+                $prof_view.=$projects.'</li><li>RATING: ';
+                $prof_view.=$rating.'</li></ul><a href="../profile/index.php?account=';
+                $prof_view.=$acc.'" class="btn">Login to View</a></div></div>';
+            }
+        }
+    }
 }
 
 
@@ -94,34 +155,11 @@ else{
                     <input type="text" autocomplete="off" name="search"  id="search" placeholder="Search..." required>
                     <!-- <button type="submit"></button> -->
                 </form>
-                <ul class="nav-menu">
-                    <!-- Chat -->
-                    <li><a href="../message/" class="menu-item">Chat</a></li>
-                    <!-- Profile -->
-                    <li><a href="../profile/" class="menu-item">Profile</a></li>
-                    <!-- Contact Us -->
-                    <li><a href="../contact-us" class="menu-item">Contact us</a></li>
-                    <!-- Logout -->
-                    <li><a href="../logout/" class="menu-item">Logout</a></li>
-                </ul>
+                <?php echo $navbar?>
             </nav>
         </header>
         <section id="listing" class="listing">
             <?php echo $prof_view?>
-            <!-- <div class="product-listing-m gray-bg">
-                <div class="product-listing-img">
-                    <img src="https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="img-responsive" id="resp-img">  
-                </div>
-                <div class="product-listing-content">
-                    <h5><a href="#" class="display-name">Nevil P Biju</a></h5>
-                    <p class="display-title" >Photographer</p>
-                    <ul>
-                        <li>PROJECTS: 0</li>
-                        <li>RATING 0.0</li>
-                    </ul>
-                    <a href="#" class="btn">Connect</a>
-                </div>
-            </div> -->
         </section>
     </body>
 </html>

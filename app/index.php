@@ -11,7 +11,18 @@ if(isset($_SESSION['user'])){
     // SELECT Profile.name, Profile.profilepic, Review.rating, Review.review FROM `Review` INNER JOIN Profile ON Profile.id = Review.author WHERE Review.account='$myid' ORDER BY Review.Time"
     $sql = "SELECT Post.content, Post.wall, Profile.id, Profile.name, Profile.profilepic, Profile.title FROM `Post` JOIN `Profile` ON Profile.id=Post.authorid ORDER BY Post.time DESC LIMIT 10";
     $posts = mysqli_query($con,$sql);
-    
+    echo '<script defer>
+    function fullText(x) {
+        x.style.textOverflow = "unset";
+        x.style.whiteSpace="unset";
+        x.style.overflow= "visible";
+    }
+    function normalText(x) {
+        x.style.textOverflow = "ellipsis";
+        x.style.whiteSpace= "nowrap";
+        x.style.overflow= "hidden";
+    }
+    </script>';
     // $post_view='';
     if(mysqli_num_rows($posts) > 0)
     {
@@ -27,7 +38,7 @@ if(isset($_SESSION['user'])){
             $post_view.=$author_img.'" id="freelancer-img"><div id="freelancer-des"><a href="../profile/index.php?account=';
             $post_view.=$acc.'" id="freelancer-name">';
             $post_view.=$author.'</a><div id="freelancer-title">';
-            $post_view.=$author_title.'</div></div></div><div id="freelancer-word">';
+            $post_view.=$author_title.'</div></div></div><div id="freelancer-word" onmouseover="fullText(this)" onmouseout="normalText(this)">';
             $post_view.=$content.'</div></td></tr></table>';
         }
     }
@@ -50,7 +61,7 @@ if(isset($_SESSION['user'])){
             $prof_view.=$author_img.'" id="freelancer-img"><div id="freelancer-des"><a href="../profile/index.php?account=';
             $prof_view.=$acc.'"id="freelancer-name">';
             $prof_view.=$author.'</a><div id="freelancer-title">';
-            $prof_view.=$author_title.'</div></div></div><div id="freelancer-word">';
+            $prof_view.=$author_title.'</div></div></div><div id="freelancer-word" onmouseover="fullText(this)" onmouseout="normalText(this)">';
             $prof_view.=$content.'</div></td></tr></table>';
         }
     }
@@ -73,7 +84,7 @@ if(isset($_SESSION['user'])){
             $rate_prof_view.=$author_img.'" id="freelancer-img"><div id="freelancer-des"><a href="../profile/index.php?account=';
             $rate_prof_view.=$acc.'"id="freelancer-name">';
             $rate_prof_view.=$author.'</a><div id="freelancer-title">';
-            $rate_prof_view.=$author_title.'</div></div></div><div id="freelancer-word">';
+            $rate_prof_view.=$author_title.'</div></div></div><div id="freelancer-word" onmouseover="fullText(this)" onmouseout="normalText(this)">';
             $rate_prof_view.=$content.'</div></td></tr></table>';
         }
     }

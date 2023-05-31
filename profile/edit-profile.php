@@ -36,6 +36,13 @@ if(isset($_SESSION['user'])){
             die('Error: '.mysqli_error($con));
         }
     }
+    if(!empty($imgurDataDP)){
+        $program =mysqli_real_escape_string($con,$_POST["program"]);
+        $sql= "UPDATE `Profile` SET `profilepic`='$imgurDataDP' WHERE UserID='$user'";
+        if(!mysqli_query($con,$sql)){
+            die('Error: '.mysqli_error($con));
+        }
+    }
 
 }
 else{
@@ -47,6 +54,8 @@ else{
 
 <!DOCTYPE html>
     <head>
+    <script defer>
+    </script>
         <title>SoloTreff</title>
         <meta charset="utf-8">
         <!-- Custom style -->
@@ -89,6 +98,16 @@ else{
                 <div  class="profile-picture">
                     <img src="<?php echo $dp?>">
                 </div>
+                <!-- <button class="btn btn-success" onclick="changeDP()">Change Profile Picture</button> -->
+                <!-- <button class="btn btn-success" onclick="openPopup()">Change Profile Picture</button> -->
+                <div id="popup" class="popup">
+                    <div class="popup-content">
+                        <span onclick="closePopup()" class="close">&times;</span>
+                        <h4>Choose an Image</h4>
+                        <input type="file" id="image-upload">
+                        <button onclick="uploadImage()">Upload</button>
+                    </div>
+                </div>
                 <form class="details-container" method="post">
                     <!-- <input type="file" class="profile-editor" id="dp" name="dp"><br/> -->
                     <input type="text" class="profile-editor" value="<?php echo $name?>" id="name" name="name" placeholder="Name"><br/>
@@ -101,5 +120,28 @@ else{
                 </form>
             </main>
         </section>
+        <script>
+            function changeDP(){
+                fetch('changePic.php');
+            }
+
+            function openPopup() {
+  document.getElementById("popup").style.display = "block";
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+function uploadImage() {
+  // Get the selected file from the input element
+  var file = document.getElementById("image-upload").files[0];
+  fetch('changePic.php?img='+file);
+  
+  // Close the popup after upload
+  closePopup();
+}
+
+        </script>
     </body>
 </html>

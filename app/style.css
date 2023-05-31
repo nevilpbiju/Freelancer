@@ -64,8 +64,13 @@
 #freelancer-word{
     padding-left: 20px;
     padding-right: 20px;
+    white-space: nowrap;
+    line-height: 1.5;
     color: #000015;
     max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: 1s;
 }
 
 #freelancer-img{
