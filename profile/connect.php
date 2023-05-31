@@ -27,6 +27,12 @@ if(isset($_SESSION['user'])){
     if(!mysqli_query($con,$sql)){
         die('Error: '.mysqli_error($con));
     }
+
+    // Create Inbox
+    $sql= "INSERT INTO `Inbox`(`id`, `userid`, `guestid`) VALUES ('$connId','$myid','$acc')";
+    if(!mysqli_query($con,$sql)){
+        die('Error: '.mysqli_error($con));
+    }
     
     // Get connections
     $sql = "SELECT `projects` from `Profile` where `id`='$acc'";

@@ -1,3 +1,4 @@
+<?php unset($_SESSION['inbox']); ?>
 <!DOCTYPE html>
     <head>
         <title>HOME</title>

@@ -4,6 +4,7 @@ include '../config.php';
 session_start();
 
 if(isset($_SESSION['user'])){
+    unset($_SESSION['inbox']);
     $myid = $_SESSION['user'];
 
     // Generate ID
@@ -22,6 +23,7 @@ if(isset($_SESSION['user'])){
 
         $account = $_GET['account'];
 
+        // Check if connection exists
         $sql = "SELECT * FROM `Connection` WHERE (user1='$myid' AND user2='$account') OR (user1='$account' AND user2='$myid') ";
         $conns = mysqli_query($con,$sql);
         if(mysqli_num_rows($conns) == 0)
@@ -220,7 +222,7 @@ else{
 
     </head>
     <body class="profile-page">
-        <header>
+    <header>
             <nav class="navigation-bar">
                 <a href="../app/"><img src="../files/black-logo.png" class="logo"></a>
                 <form name="search-form" class="search-form" method="post" action="../search/">
@@ -233,7 +235,7 @@ else{
                     <!-- Profile -->
                     <li><a href="../profile/" class="menu-item">Profile</a></li>
                     <!-- Contact Us -->
-                    <li><a href="../contact.php" class="menu-item">Contact us</a></li>
+                    <li><a href="../contact-us" class="menu-item">Contact us</a></li>
                     <!-- Logout -->
                     <li><a href="../logout/" class="menu-item">Logout</a></li>
                 </ul>
